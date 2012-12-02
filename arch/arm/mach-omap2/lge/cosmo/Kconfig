@@ -1,0 +1,45 @@
+#
+# LGE P940
+#
+
+config MACH_LGE_COSMO
+	bool "LGE COSMO board"
+	select HIGHMEM
+	select TWL6030_PWM
+	select TWL6030_GPADC
+	select MISC_DEVICES
+	select STAGING
+	select IIO
+	select HWMON
+	select INPUT_MISC
+	select INPUT_KEYBOARD
+	select INPUT_TOUCHSCREEN
+	select POWER_SUPPLY
+	select TWL6030_BCI_BATTERY
+#	select SECURITY_MIDDLEWARE_COMPONENT
+	select CDC_TCXO
+	select INPUT_TWL6030_PWRBUTTON
+	select OMAP_REBOOT_REASON
+
+config INPUT_LGE_ANDROID_3KEYS
+	bool "LGE COSMO Android 3kyes for korea domestic board"
+	depends on MACH_LGE_COSMO
+
+config MACH_LGE_COSMO_P920
+	bool "LGE COSMO P920 board"
+	depends on MACH_LGE_COSMO
+	default y
+
+config MACH_LGE_COSMO_SU760
+	bool "LGE COSMO SU760 board"
+	depends on MACH_LGE_COSMO
+
+config MACH_LGE_COSMO_3D_DISPLAY
+	bool "LGE COSMO SU760 board"
+	depends on MACH_LGE_COSMO
+	default y
+config COSMO_ICS_MEM_OPT
+	bool "LGE COSMO SU760 board"
+	depends on MACH_LGE_COSMO
+	default y
+

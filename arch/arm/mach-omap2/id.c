@@ -250,7 +250,7 @@ static void __init omap4_check_features(void)
 	default:
 		/* Standard device */
 		if (cpu_is_omap443x())
-			omap4_features |= OMAP4_HAS_MPU_1GHZ;
+			omap4_features |= OMAP4_HAS_MPU_1_2GHZ;
 		else if (cpu_is_omap446x()) {
 			omap4_features |= OMAP4_HAS_MPU_1_2GHZ;
 			omap4_features |= OMAP4_HAS_IVA_430MHZ;

@@ -92,8 +92,8 @@ struct omap4_ldo_abb_trim_data {
 #define OMAP4430_VDD_MPU_OPP50_UV		1025000
 #define OMAP4430_VDD_MPU_OPP100_UV		1200000
 #define OMAP4430_VDD_MPU_OPPTURBO_UV		1325000
-#define OMAP4430_VDD_MPU_OPPNITRO_UV		1388000
-#define OMAP4430_VDD_MPU_OPPNITROSB_UV		1398000
+#define OMAP4430_VDD_MPU_OPPNITRO_UV		1374000
+#define OMAP4430_VDD_MPU_OPPNITROSB_UV		1375000
 
 
 struct omap_volt_data omap443x_vdd_mpu_volt_data[] = {
@@ -178,7 +178,7 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	/* MPU OPP4 - OPP-NT */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 1008000000, OMAP4430_VDD_MPU_OPPNITRO_UV),
 	/* MPU OPP5 - OPP-SB */
-	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", false, 1200000000, OMAP4430_VDD_MPU_OPPNITROSB_UV),
+	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 1200000000, OMAP4430_VDD_MPU_OPPNITROSB_UV),
 	/* L3 OPP1 - OPP50 */
 	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 100000000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* L3 OPP2 - OPP100, OPP-Turbo, OPP-SB */

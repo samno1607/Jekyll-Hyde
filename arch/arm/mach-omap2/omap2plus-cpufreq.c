@@ -152,7 +152,7 @@ static unsigned int omap_thermal_lower_speed(void)
 	unsigned int curr;
 	int i;
 
-	curr = max_thermal;
+	curr = omap_getspeed(0);
 
 	for (i = 0; freq_table[i].frequency != CPUFREQ_TABLE_END; i++)
 		if (freq_table[i].frequency > max &&
@@ -426,8 +426,8 @@ static int __cpuinit omap_cpu_init(struct cpufreq_policy *policy)
 
 	cpufreq_frequency_table_get_attr(freq_table, policy->cpu);
 
-	policy->min = 100000;
-	policy->max = 1200000;
+	policy->min = 115200;
+	policy->max = 1228800;
 	policy->cur = omap_getspeed(policy->cpu);
 
 	for (i = 0; freq_table[i].frequency != CPUFREQ_TABLE_END; i++)

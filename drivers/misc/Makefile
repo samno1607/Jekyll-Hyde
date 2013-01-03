@@ -52,6 +52,7 @@ obj-$(CONFIG_APANIC)		+= apanic.o
 obj-$(CONFIG_SENSORS_AK8975)	+= akm8975.o
 obj-$(CONFIG_OMAP_DIE_TEMP_SENSOR)	+= omap_temp_sensor.o
 obj-$(CONFIG_FSYNC_CONTROL)     += fsync_control.o
+obj-$(CONFIG_SOUND_CONTROL)     += sound_control.o
 #LGE_SJIT 09/28/2011 [mohamed.khadri@lge.com] BT control path 
 obj-$(CONFIG_LBEE9QMB_RFKILL)	+= lbee9qmb-rfkill.o
 obj-$(CONFIG_BD_ADDRESS)       += bd_address.o

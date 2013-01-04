@@ -2,7 +2,7 @@
 # Automatically generated make config: don't edit
 # Linux/arm 3.0.21 Kernel Configuration
 #
-# Jekyll & Hyde Kernel Version 0.9 By samno
+# Jekyll & Hyde Kernel Version 1.2.0 By samno
 # http://forum.xda-developers.com/showthread.php?t=1864325
 #
 
@@ -469,7 +469,7 @@ CONFIG_MIGRATION=y
 CONFIG_ZONE_DMA_FLAG=0
 CONFIG_BOUNCE=y
 CONFIG_VIRT_TO_BUS=y
-# CONFIG_KSM is not set
+CONFIG_KSM=y
 CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
 # CONFIG_CLEANCACHE is not set
 CONFIG_FORCE_MAX_ZONEORDER=11
@@ -2441,6 +2441,7 @@ CONFIG_IIO=y
 #
 # Triggers - standalone
 #
+CONFIG_ZRAM=y
 # CONFIG_FB_SM7XX is not set
 # CONFIG_LIRC_STAGING is not set
 CONFIG_MACH_NO_WESTBRIDGE=y

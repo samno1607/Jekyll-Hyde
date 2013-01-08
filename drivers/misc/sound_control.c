@@ -12,15 +12,11 @@
 #include <linux/miscdevice.h>
 #include <linux/sound_control.h>
 
-#define SOUNDCONTROL_VERSION 1
+#define SOUNDCONTROL_VERSION 1 // Not Quite ;/
 
 static bool high_perf_mode = true;
 
-static unsigned int volume_boost = 0;
 
-#define MAX_VOLUMEBOOST 6
-
-extern void soundcontrol_updatevolume(unsigned int volumeboost);
 extern void soundcontrol_updateperf(bool highperf_enabled);
 
 static ssize_t soundcontrol_highperf_read(struct device * dev, struct device_attribute * attr, char * buf)
@@ -69,53 +65,17 @@ static ssize_t soundcontrol_highperf_write(struct device * dev, struct device_at
     return size;
 }
 
-static ssize_t soundcontrol_volumeboost_read(struct device * dev, struct device_attribute * attr, char * buf)
-{
-    return sprintf(buf, "%u\n", volume_boost);
-}
-
-static ssize_t soundcontrol_volumeboost_write(struct device * dev, struct device_attribute * attr, const char * buf, size_t size)
-{
-    unsigned int data;
-
-    if(sscanf(buf, "%u\n", &data) == 1) 
-	{
-	    if (data <= MAX_VOLUMEBOOST)
-		{
-		    if (data != volume_boost) {
-			volume_boost = data;
-
-			soundcontrol_updatevolume(volume_boost);
-
-			pr_info("SOUNDCONTROL volume boost set to %u\n", volume_boost); 
-		    }
-		}
-	    else
-		{
-		    pr_info("%s: invalid input range %u\n", __FUNCTION__, data);
-		}
-	} 
-    else 
-	{
-	    pr_info("%s: invalid input\n", __FUNCTION__);
-	}
-
-    return size;
-}
-
 static ssize_t soundcontrol_version(struct device * dev, struct device_attribute * attr, char * buf)
 {
     return sprintf(buf, "%u\n", SOUNDCONTROL_VERSION);
 }
 
 static DEVICE_ATTR(highperf_enabled, S_IRUGO | S_IWUGO, soundcontrol_highperf_read, soundcontrol_highperf_write);
-static DEVICE_ATTR(volume_boost, S_IRUGO | S_IWUGO, soundcontrol_volumeboost_read, soundcontrol_volumeboost_write);
 static DEVICE_ATTR(version, S_IRUGO , soundcontrol_version, NULL);
 
 static struct attribute *soundcontrol_notification_attributes[] = 
     {
 	&dev_attr_highperf_enabled.attr,
-	&dev_attr_volume_boost.attr,
 	&dev_attr_version.attr,
 	NULL
     };

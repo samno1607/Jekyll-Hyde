@@ -14,11 +14,11 @@
 
 #define SOUNDCONTROL_VERSION 1
 
-static bool high_perf_mode = false;
+static bool high_perf_mode = true;
 
 static unsigned int volume_boost = 0;
 
-#define MAX_VOLUMEBOOST 3
+#define MAX_VOLUMEBOOST 6
 
 extern void soundcontrol_updatevolume(unsigned int volumeboost);
 extern void soundcontrol_updateperf(bool highperf_enabled);

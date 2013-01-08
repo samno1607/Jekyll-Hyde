@@ -608,4 +608,10 @@ config SOUND_CONTROL
         help
           Enable support for Sound Control
 
+config LIVE_OC
+        bool "Support For Live OC"
+        default y
+        help
+          Support For Live OC
+
 endif # MISC_DEVICES

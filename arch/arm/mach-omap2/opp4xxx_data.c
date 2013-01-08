@@ -29,6 +29,10 @@
 #include "omap_opp_data.h"
 #include "pm.h"
 
+#ifdef CONFIG_LIVE_OC
+#include <linux/live_oc.h>
+#endif
+
 /*
  * STD_FUSE_OPP_DPLL_1 contains info about ABB trim type for MPU/IVA.
  * This probably is an ugly location to put the DPLL trim details.. but,
@@ -102,8 +106,8 @@ struct omap4_ldo_abb_trim_data {
 #define OMAP4430_VDD_MPU_OPPNITROSB_UV		1350000
 #define OMAP4430_VDD_MPU_OPPNITROSB2_UV		1365000
 #define OMAP4430_VDD_MPU_OPPNITROSB3_UV		1380000
-#define OMAP4430_VDD_MPU_OPPNITROSB4_UV		1450000
-#define OMAP4430_VDD_MPU_OPPNITROSB5_UV		1475000
+#define OMAP4430_VDD_MPU_OPPNITROSB4_UV		1388000
+#define OMAP4430_VDD_MPU_OPPNITROSB5_UV		1400000
 
 
 struct omap_volt_data omap443x_vdd_mpu_volt_data[] = {
@@ -137,12 +141,14 @@ struct omap_volt_data omap443x_vdd_iva_volt_data[] = {
 	VOLT_DATA_DEFINE(0, 0, 0, 0, 0, 0, 0),
 };
 
-#define OMAP4430_VDD_CORE_OPP50_UV		 962000
-#define OMAP4430_VDD_CORE_OPP100_UV		1127000
+#define OMAP4430_VDD_CORE_OPP50_UV		 950000
+#define OMAP4430_VDD_CORE_OPP100_UV		1100000
+#define OMAP4430_VDD_CORE_OPP100_OV_UV		1350000
 
 struct omap_volt_data omap443x_vdd_core_volt_data[] = {
 	VOLT_DATA_DEFINE(OMAP4430_VDD_CORE_OPP50_UV, 0, OMAP44XX_CONTROL_FUSE_CORE_OPP50, 0x00, 0xf4, 0x0c, OMAP_ABB_NONE),
 	VOLT_DATA_DEFINE(OMAP4430_VDD_CORE_OPP100_UV, 0, OMAP44XX_CONTROL_FUSE_CORE_OPP100, 0x00, 0xf9, 0x16, OMAP_ABB_NONE),
+	VOLT_DATA_DEFINE(OMAP4430_VDD_CORE_OPP100_OV_UV, 0, OMAP44XX_CONTROL_FUSE_CORE_OPP100OV, 0x01, 0xf9, 0x16, OMAP_ABB_NONE),
 	VOLT_DATA_DEFINE(0, 0, 0, 0, 0, 0, 0),
 };
 
@@ -169,10 +175,10 @@ static struct omap_vdd_dep_volt omap443x_vdd_mpu_core_dep_data[] = {
 	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITRO_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
 	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITRO2_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
 	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
-	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB2_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
-	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB3_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
-	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB4_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
-	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB5_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
+	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB2_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_OV_UV},
+	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB3_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_OV_UV},
+	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB4_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_OV_UV},
+	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB5_UV, .dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_OV_UV},
 };
 
 struct omap_vdd_dep_info omap443x_vddmpu_dep_info[] = {
@@ -237,6 +243,7 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 100000000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* L3 OPP2 - OPP100, OPP-Turbo, OPP-SB */
 	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 200000000, OMAP4430_VDD_CORE_OPP100_UV),
+	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 200000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* IVA OPP1 - OPP50 */
 	OPP_INITIALIZER("iva", "virt_iva_ck", "iva", true, 133000000, OMAP4430_VDD_IVA_OPP50_UV),
 	/* IVA OPP2 - OPP100 */
@@ -247,6 +254,8 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true, 153600000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* SGX OPP2 - OPP100 */
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true, 307200000, OMAP4430_VDD_CORE_OPP100_UV),
+	/* SGX OPP2 - OPP100 */
+	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 384000000, OMAP4430_VDD_CORE_OPP100_UV),
 	/* FDIF OPP1 - OPP25 */
 	OPP_INITIALIZER("fdif", "fdif_fck", "core", true, 32000000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* FDIF OPP2 - OPP50 */
@@ -760,6 +769,11 @@ int __init omap4_opp_init(void)
 		omap4_opp_enable("mpu", 1500000000);
 
 out:
+
+#ifdef CONFIG_LIVE_OC
+	liveoc_init();
+#endif
+
 	return r;
 }
 device_initcall(omap4_opp_init);

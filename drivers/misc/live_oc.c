@@ -557,15 +557,11 @@ static ssize_t liveoc_version(struct device * dev, struct device_attribute * att
 }
 
 static DEVICE_ATTR(mpu_ocvalue, S_IRUGO | S_IWUGO, mpu_ocvalue_read, mpu_ocvalue_write);
-static DEVICE_ATTR(core_ocvalue, S_IRUGO | S_IWUGO, core_ocvalue_read, core_ocvalue_write);
-static DEVICE_ATTR(gpu_performance, S_IRUGO | S_IWUGO, gpu_performance_read, gpu_performance_write);
 static DEVICE_ATTR(version, S_IRUGO , liveoc_version, NULL);
 
 static struct attribute *liveoc_attributes[] = 
     {
 	&dev_attr_mpu_ocvalue.attr,
-	&dev_attr_core_ocvalue.attr,
-	&dev_attr_gpu_performance.attr,
 	&dev_attr_version.attr,
 	NULL
     };

@@ -105,7 +105,7 @@ struct omap4_ldo_abb_trim_data {
 #define OMAP4430_VDD_MPU_OPPNITRO2_UV		1300000
 #define OMAP4430_VDD_MPU_OPPNITROSB_UV		1350000
 #define OMAP4430_VDD_MPU_OPPNITROSB2_UV		1365000
-#define OMAP4430_VDD_MPU_OPPNITROSB3_UV		1380000
+#define OMAP4430_VDD_MPU_OPPNITROSB3_UV		1375000
 #define OMAP4430_VDD_MPU_OPPNITROSB4_UV		1388000
 #define OMAP4430_VDD_MPU_OPPNITROSB5_UV		1400000
 
@@ -143,7 +143,7 @@ struct omap_volt_data omap443x_vdd_iva_volt_data[] = {
 
 #define OMAP4430_VDD_CORE_OPP50_UV		 950000
 #define OMAP4430_VDD_CORE_OPP100_UV		1100000
-#define OMAP4430_VDD_CORE_OPP100_OV_UV		1350000
+#define OMAP4430_VDD_CORE_OPP100_OV_UV		1250000
 
 struct omap_volt_data omap443x_vdd_core_volt_data[] = {
 	VOLT_DATA_DEFINE(OMAP4430_VDD_CORE_OPP50_UV, 0, OMAP44XX_CONTROL_FUSE_CORE_OPP50, 0x00, 0xf4, 0x0c, OMAP_ABB_NONE),
@@ -254,8 +254,12 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true, 153600000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* SGX OPP2 - OPP100 */
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true, 307200000, OMAP4430_VDD_CORE_OPP100_UV),
-	/* SGX OPP2 - OPP100 */
-	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 384000000, OMAP4430_VDD_CORE_OPP100_UV),
+	/* SGX OPP3 - OPP150 */
+	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true, 384000000, OMAP4430_VDD_CORE_OPP100_UV),
+	/* SGX OPP4 - OPP175 */
+	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 460000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
+	/* SGX OPP5 - OPP200 */
+	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 512000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* FDIF OPP1 - OPP25 */
 	OPP_INITIALIZER("fdif", "fdif_fck", "core", true, 32000000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* FDIF OPP2 - OPP50 */

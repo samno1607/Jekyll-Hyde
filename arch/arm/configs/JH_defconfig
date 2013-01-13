@@ -2,7 +2,7 @@
 # Automatically generated make config: don't edit
 # Linux/arm 3.0.21 Kernel Configuration
 #
-# Jekyll & Hyde Kernel Version 1.2.0 By samno
+# Jekyll & Hyde Kernel By samno
 # http://forum.xda-developers.com/showthread.php?t=1864325
 #
 
@@ -630,9 +630,9 @@ CONFIG_INET_XFRM_MODE_BEET=y
 # CONFIG_INET_LRO is not set
 CONFIG_INET_DIAG=y
 CONFIG_INET_TCP_DIAG=y
-# CONFIG_TCP_CONG_ADVANCED is not set
-CONFIG_TCP_CONG_CUBIC=y
-CONFIG_DEFAULT_TCP_CONG="cubic"
+CONFIG_TCP_CONG_ADVANCED=y
+CONFIG_TCP_CONG_WESTWOOD=y
+CONFIG_DEFAULT_TCP_CONG="westwood"
 # CONFIG_TCP_MD5SIG is not set
 CONFIG_IPV6=y
 CONFIG_IPV6_PRIVACY=y

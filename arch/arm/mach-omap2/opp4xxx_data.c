@@ -248,13 +248,13 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	/* L3 OPP1 - OPP50 */
 	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 133000000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* L3 OPP2 - OPP100 */
-	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 266100000, OMAP4430_VDD_CORE_OPP100_UV),
+	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", true, 266000000, OMAP4430_VDD_CORE_OPP100_UV),
 	/* L3 OPP3 - OPP-Turbo */
-	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", false, 332000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
+//	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", false, 266000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* IVA OPP4 - OPP-Nitro */
-	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", false, 365000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
+//	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", false, 365000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* IVA OPP5 - OPP-NitroSB */
-	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", false, 399000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
+//	OPP_INITIALIZER("l3_main_1", "virt_l3_ck", "core", false, 399000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* IVA OPP1 - OPP50 */
 	OPP_INITIALIZER("iva", "virt_iva_ck", "iva", true, 133000000, OMAP4430_VDD_IVA_OPP50_UV),
 	/* IVA OPP2 - OPP100 */
@@ -272,9 +272,9 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	/* SGX OPP3 - OPP150 */
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true, 384000000, OMAP4430_VDD_CORE_OPP100_UV),
 	/* SGX OPP4 - OPP175 */
-	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 460000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
+//	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 460000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* SGX OPP5 - OPP200 */
-	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 512000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
+//	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", false, 512000000, OMAP4430_VDD_CORE_OPP100_OV_UV),
 	/* FDIF OPP1 - OPP25 */
 	OPP_INITIALIZER("fdif", "fdif_fck", "core", true, 32000000, OMAP4430_VDD_CORE_OPP50_UV),
 	/* FDIF OPP2 - OPP50 */

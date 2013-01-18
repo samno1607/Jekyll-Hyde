@@ -38,7 +38,7 @@ const struct lpddr2_timings lpddr2_elpida_timings_466_mhz = {
 };
 
 const struct lpddr2_timings lpddr2_elpida_timings_400_mhz = {
-	.max_freq	= 466000000,
+	.max_freq	= 400000000,
 	.RL		= 6,
 	.tRPab		= 21,
 	.tRCD		= 18,
@@ -61,7 +61,7 @@ const struct lpddr2_timings lpddr2_elpida_timings_400_mhz = {
 };
 
 const struct lpddr2_timings lpddr2_elpida_timings_333_mhz = {
-	.max_freq	= 366000000,
+	.max_freq	= 333000000,
 	.RL		= 5,
 	.tRPab		= 21,
 	.tRCD		= 18,
@@ -84,7 +84,7 @@ const struct lpddr2_timings lpddr2_elpida_timings_333_mhz = {
 };
 
 const struct lpddr2_timings lpddr2_elpida_timings_200_mhz = {
-	.max_freq	= 220000000,
+	.max_freq	= 200000000,
 	.RL		= 3,
 	.tRPab		= 21,
 	.tRCD		= 18,

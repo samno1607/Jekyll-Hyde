@@ -130,9 +130,9 @@ struct omap_volt_data omap443x_vdd_mpu_volt_data[] = {
 	VOLT_DATA_DEFINE(0, 0, 0, 0, 0, 0, 0),
 };
 
-#define OMAP4430_VDD_IVA_OPP50_UV		 950000
-#define OMAP4430_VDD_IVA_OPP100_UV		1114000
-#define OMAP4430_VDD_IVA_OPPTURBO_UV		1291000
+#define OMAP4430_VDD_IVA_OPP50_UV		 928000
+#define OMAP4430_VDD_IVA_OPP100_UV		1100000
+#define OMAP4430_VDD_IVA_OPPTURBO_UV		1260000
 #define OMAP4430_VDD_IVA_OPPNITRO_UV		1375000
 #define OMAP4430_VDD_IVA_OPPNITROSB_UV		1376000
 
@@ -145,8 +145,8 @@ struct omap_volt_data omap443x_vdd_iva_volt_data[] = {
 	VOLT_DATA_DEFINE(0, 0, 0, 0, 0, 0, 0),
 };
 
-#define OMAP4430_VDD_CORE_OPP50_UV		 950000
-#define OMAP4430_VDD_CORE_OPP100_UV		1150000
+#define OMAP4430_VDD_CORE_OPP50_UV		 930000
+#define OMAP4430_VDD_CORE_OPP100_UV		1100000
 #define OMAP4430_VDD_CORE_OPP100_OV_UV		1250000
 
 struct omap_volt_data omap443x_vdd_core_volt_data[] = {
@@ -780,8 +780,8 @@ int __init omap4_opp_init(void)
 		omap4_opp_enable("mpu", 1228800000);
 		omap4_opp_enable("mpu", 1305600000);
 		omap4_opp_enable("mpu", 1420800000);
-//		omap4_opp_enable("mpu", 1536000000);
-//		omap4_opp_enable("mpu", 1612800000);
+		omap4_opp_enable("mpu", 1536000000);
+		omap4_opp_enable("mpu", 1612800000);
 	if (!trimmed)
 		pr_info("This is DPLL un-trimmed SOM. OPP is limited at 1.2 GHz\n");
 	if (omap4_has_mpu_1_5ghz() && trimmed)

@@ -216,23 +216,23 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	/* MPU OPP-100 - OPP10 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 115200000, OMAP4430_VDD_MPU_OPP10_UV),
 	/* MPU OPP-200 - OPP25 */
-	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 230400000, OMAP4430_VDD_MPU_OPP25_UV),
+//	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 230400000, OMAP4430_VDD_MPU_OPP25_UV),
 	/* MPU OPP-300 - OPP50 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 307200000, OMAP4430_VDD_MPU_OPP50_UV),
 	/* MPU OPP-400 - OPP75 */
-	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 422400000, OMAP4430_VDD_MPU_OPP75_UV),
+//	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 422400000, OMAP4430_VDD_MPU_OPP75_UV),
 	/* MPU OPP-500 - OPP100 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 537600000, OMAP4430_VDD_MPU_OPP100_UV),
 	/* MPU OPP-600 - OPP125 */
-	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 614400000, OMAP4430_VDD_MPU_OPP125_UV),
+//	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 614400000, OMAP4430_VDD_MPU_OPP125_UV),
 	/* MPU OPP-700 - OPP150 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 729600000, OMAP4430_VDD_MPU_OPP150_UV),
 	/* MPU OPP-800 - OPP-Turbo */
-	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 806400000, OMAP4430_VDD_MPU_OPPTURBO_UV),
+//	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 806400000, OMAP4430_VDD_MPU_OPPTURBO_UV),
 	/* MPU OPP-900 - OPP-Turbo2 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 921600000, OMAP4430_VDD_MPU_OPPTURBO2_UV),
 	/* MPU OPP-1000 - OPP-NT */
-	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 1036800000, OMAP4430_VDD_MPU_OPPNITRO_UV),
+//	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true, 1036800000, OMAP4430_VDD_MPU_OPPNITRO_UV),
 	/* MPU OPP-1100 - OPP-NT2 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", false, 1113600000, OMAP4430_VDD_MPU_OPPNITRO2_UV),
 	/* MPU OPP-1200 - OPP-SB */

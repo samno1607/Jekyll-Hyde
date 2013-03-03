@@ -47,6 +47,8 @@
 #include <asm/gpio.h>
 
 #include <lge/board.h>
+
+#include <linux/fastchg.h>
 #define DEBUGE_MAX14526
 #define DEBUGE
 
@@ -167,7 +169,7 @@ int muic_set_mhl_mode(struct muic_client_device *mcdev)// (struct i2c_client *cl
 
 	if(!client)
 	{
-		printk("muic %s, client : %d", __func__, client);
+		//printk("muic %s, client : %d", __func__, client);
 		return -1;
 	}
 
@@ -191,6 +193,7 @@ int muic_set_mhl_mode(struct muic_client_device *mcdev)// (struct i2c_client *cl
 #endif
 
 //	muic_set_mode(MUIC_MHL);
+	return 0;
 }
 
 int muic_set_cp_usb_mode(struct muic_client_device *mcdev)// (struct i2c_client *client)
@@ -232,7 +235,7 @@ int muic_set_ap_uart_mode(struct muic_client_device *mcdev)// (struct i2c_client
 
 	if(!client)
 	{
-		printk("muic %s, client : %d", __func__, client);
+		//printk("muic %s, client : %d", __func__, client);
 		return -1;
 	}
 
@@ -289,7 +292,7 @@ int muic_set_ap_usb_mode(struct muic_client_device *mcdev)// (struct i2c_client 
 
 	if(!client)
 	{
-		printk("muic %s, client : %d", __func__, client);
+		//printk("muic %s, client : %d", __func__, client);
 		return -1;
 	}
 
@@ -462,7 +465,7 @@ int muic_set_device_none_detect(struct i2c_client *client,unsigned char int_stat
 		else if(id_register_value == IDNO_0101)/*180k + VBUS LG proprietary TA Detected*/
 		{
 			//muic_set_mode(MUIC_LG_TA);
-			muic_set_mode(MUIC_AP_USB);//lg usb calbleÀÇ int_stat_value =0x15 ·Î µ¿ÀÛµÇ¾î, ÀÏ¹Ý usb cable·Î ¼öÁ¤ ÇÔ.
+			muic_set_mode(MUIC_AP_USB);//lg usb calble\C0\C7 int_stat_value =0x15 \B7\CE \B5\BF\C0ÛµÇ¾\EE, \C0Ï¹\DD usb cable\B7\CE \BC\F6\C1\A4 \C7\D4.
 		}
 		else// if(charger_value & CHPORT)
 		{
@@ -475,12 +478,21 @@ int muic_set_device_none_detect(struct i2c_client *client,unsigned char int_stat
 			dev_info(&client->dev, "muic: charger_value :0x%x\n",charger_value);
 			//muic_set_charger_mode(client, charger_value);
 
-			//else if( (stat_value & CHGDET)&&((id_register_value & IDNO) == IDNO_1011))//stat_value==0x9B ÀÏ¹Ý ÃæÀü±â
+			//else if( (stat_value & CHGDET)&&((id_register_value & IDNO) == IDNO_1011))//stat_value==0x9B \C0Ï¹\DD \C3\E6\C0\FC\B1\E2
+
+#ifdef CONFIG_FORCE_FAST_CHARGE
+			if((int_stat_value & CHGDET) || (force_fast_charge != 0))
+			{
+				muic_i2c_write_byte(client,SW_CONTROL, COMP2_TO_HZ | COMN1_TO_HZ);
+				muic_set_mode(MUIC_LG_TA);
+			}
+#else
 			if(int_stat_value & CHGDET)
 			{
 				muic_i2c_write_byte(client,SW_CONTROL, COMP2_TO_HZ | COMN1_TO_HZ);
 				muic_set_mode(MUIC_LG_TA);
 			}
+#endif
 			else if (charger_value & DCPORT)
 			{
 				/* Not used actually. Special TA for North America.*/
@@ -499,7 +511,7 @@ int muic_set_device_none_detect(struct i2c_client *client,unsigned char int_stat
 				//muic_path = MUIC_LG_TA;
 				//charging_mode = CHARGING_LG_TA;
 			}
-			else //stat_value==0x1B ÀÏ¹Ý UBSÄÉÀÌºí
+			else //stat_value==0x1B \C0Ï¹\DD UBS\C4\C9\C0Ìº\ED
 			{
 				//set_max14526_ap_usb_mode();
 				muic_set_mode(MUIC_AP_USB);
@@ -520,11 +532,11 @@ extern void android_USB_disconnect(void);// for usb disconnect event
 s32 muic_max14526_detect_accessory(struct i2c_client *client, s32 upon_irq)
 {
 	s32 ret = 0;
-	s32 loop = 0;
+	//s32 loop = 0;
 	u8 int_stat_value=0;
 	
 	TYPE_MUIC_MODE muic_mode = muic_get_mode();
-	struct ts5usb_device *dev = i2c_get_clientdata(client);
+	//struct ts5usb_device *dev = i2c_get_clientdata(client);
 	/*
 	 * Upon an MUIC IRQ (MUIC_INT_N falls),
 	 * wait 70ms before reading INT_STATUS1 and STATUS.
@@ -741,7 +753,7 @@ static int __init muic_state(char *str)
 __setup("muic_state=", muic_state);/* LGE_CHANGE_E [kenneth.kang@lge.com] 2011-07-26, CP retain mode */
 
 /*mo2seongjae.jang@lge.com 20120813
-bootable\bootloader\lk\dev\muic\muic.c muic_init ÇÔ¼ö¿¡¼­ cmdlineÀ¸·Î Ã³¸®µÈ ÇÔ¼ö.
+bootable\bootloader\lk\dev\muic\muic.c muic_init \C7Ô¼\F6\BF\A1\BC\AD cmdline\C0\B8\B7\CE Ã³\B8\AE\B5\C8 \C7Ô¼\F6.
 */
 static int __init muic_int_stat(char *str)
 {
@@ -756,7 +768,7 @@ static int __init muic_int_stat(char *str)
 	if(muic_int_stat_mode & VBUS)
 	{
 		if((id_register_value == IDNO_0010) || \
-		    (id_register_value == IDNO_1001) || \ 
+		    (id_register_value == IDNO_1001) || \
 		    (id_register_value == IDNO_1010) || \
 		    (id_register_value == IDNO_0100))
 		su760_factory_cable_detect = 1;
@@ -793,14 +805,14 @@ static irqreturn_t max14526_interrupt_handler(s32 irq, void *data)
 	return IRQ_HANDLED;
 }
 
-static int muic_int_stat_read(struct muic_client_device *mcdev,
+static int muic_int_stat_read(struct muic_device *mcdev,
 	char *buf)
 {	
 	struct i2c_client *client = max14526; //to_i2c_client(%mcdev->dev);// i2c_verify_client(&mcdev->dev);
 
 	u32 ret;
-	u32 value;
-	unsigned int len;
+	u8 value;
+	int len;
 
 	ret = muic_i2c_read_byte(client, INT_STAT, &value);
 //	value = i2c_smbus_read_byte_data(muic_client, INT_STAT);

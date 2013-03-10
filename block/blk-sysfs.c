@@ -273,7 +273,8 @@ static struct queue_sysfs_entry queue_requests_entry = {
 };
 
 static struct queue_sysfs_entry queue_ra_entry = {
-	.attr = {.name = "read_ahead_kb", .mode = S_IRUGO | S_IWUSR },
+	.attr = {.name = "read_ahead_kb",
+		.mode = S_IRUGO | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH },
 	.show = queue_ra_show,
 	.store = queue_ra_store,
 };
@@ -305,7 +306,8 @@ static struct queue_sysfs_entry queue_max_segment_size_entry = {
 };
 
 static struct queue_sysfs_entry queue_iosched_entry = {
-	.attr = {.name = "scheduler", .mode = S_IRUGO | S_IWUSR },
+	.attr = {.name = "scheduler",
+		.mode = S_IRUGO | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH },
 	.show = elv_iosched_show,
 	.store = elv_iosched_store,
 };

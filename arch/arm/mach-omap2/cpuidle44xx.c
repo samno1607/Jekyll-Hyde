@@ -113,17 +113,29 @@ static struct clockdomain *cpu1_cd;
 
 static struct cpuidle_params cpuidle_params_table[] = {
 	/* C1 - CPUx WFI + MPU ON  + CORE ON */
-	{.exit_latency = 2 + 2,	.target_residency = 5, .valid = 1},
+	{
+         .exit_latency = 4,	
+         .target_residency = 4, 
+         .valid = 1,
+        },
 	/* C2 - CPU0 INA + CPU1 INA + MPU INA  + CORE INA */
-	{.exit_latency = 1100, .target_residency = 1100, .valid = 1},
+	{
+         .exit_latency = 300, 
+         .target_residency = 1800,
+         .valid = 1,
+        },
 	/* C3 - CPU0 OFF + CPU1 OFF + MPU CSWR + CORE CSWR */
-	{.exit_latency = 1200, .target_residency = 1200, .valid = 1},
-#ifdef CONFIG_OMAP_ALLOW_OSWR
+	{
+         .exit_latency = 4000,
+         .target_residency = 7000,
+         .valid = 1,
+        },
 	/* C4 - CPU0 OFF + CPU1 OFF + MPU CSWR + CORE OSWR */
-	{.exit_latency = 1500, .target_residency = 1500, .valid = 1},
-#else
-	{.exit_latency = 1500, .target_residency = 1500, .valid = 0},
-#endif
+	{
+         .exit_latency = 4200,
+         .target_residency = 1500,
+         .valid = 1,
+        },
 };
 
 static void omap4_update_actual_state(struct cpuidle_device *dev,
